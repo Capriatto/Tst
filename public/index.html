@@ -26,15 +26,26 @@
         height: 450px;
     }
     .dislike, .like{
-        color : gray;
+        color : grey;
     }
+
+    .dislike:hover, .like:hover
+    {
+        color : grey;
+        text-decoration: none;
+    }
+
     .onDislike{
-        color : #DF0101;
+        color: #DF0101;
     }
     .onLike{
-        color : #088A08;
+        color: #088A08;
     }
-    
+
+   a:hover, a:focus, a:active{
+    color:grey;
+   }
+
     </style>
 
     <script src="/socket.io/socket.io.js"></script>
@@ -102,6 +113,7 @@
             $('#like-'+id).attr('class', 'fa fa-thumbs-up like')
             socket.emit('unlike', id);
         }
+        document.activeElement.blur();
     }
     function dislike(id){
 
@@ -121,6 +133,7 @@
             $('#dislike-'+id).attr('class', 'fa fa-thumbs-down dislike')
             socket.emit('undislike', id);
         }
+         document.activeElement.blur();
     }
 
     $(document).ready(function(){
