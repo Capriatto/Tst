@@ -1,16 +1,19 @@
 {
-  "name": "cpco7karaoke",
+  "name": "Mikgro",
   "version": "0.0.0",
-  "description": "#CPCO7 Karaoke",
+  "description": "Aplicación para la interacción entre asistentes y presentador en eventos académicos/comerciales",
   "main": "server.js",
   "scripts": {
     "start": "forever start server.js",
     "stop": "forever stop server.js"
   },
   "keywords": [
-    "cpco7",
-    "karaoke",
-    "gentebool"
+    "presentacion",
+    "evento",
+    "academico",
+    "comercial",
+    "interaccion",
+    "asistentes"
   ],
   "dependencies": {
     "express": "latest",
@@ -18,6 +21,6 @@
     "redis": "^0.10.3",
     "socket.io": "latest"
   },
-  "author": "Pablo Dorado <pandres95@gentebool.co>",
+  "author": "Mikgro",
   "license": "GPL"
 }
