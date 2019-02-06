@@ -21,36 +21,6 @@
     <!--loading a favicon-->
     <link rel="shortcut icon" type="ico" href="favicon.ico"/>
 
-    <style>
-    #chatBody{
-        overflow: scroll;
-        height: 450px;
-    }
-    .dislike, .like{
-        color : grey;
-    }
-
-    .dislike:hover, .like:hover
-    {
-        color : grey;
-        text-decoration: none;
-    }
-
-    .onDislike{
-        color: #DF0101;
-    }
-    .onLike{
-        color: #088A08;
-    }
-
-   a:hover, a:focus, a:active{
-    color:grey;
-    text-decoration: none;
-
-   }
-
-    </style>
-
     <script src="/socket.io/socket.io.js"></script>
     <script>
 
@@ -147,7 +117,7 @@
             socket.emit('message', $('#twitter').val(), $('#mssge').val(), date);
             $('#twitter').val('');
             $('#mssge').val('');
-
+              
             return false;
         });
 
@@ -290,12 +260,12 @@
                             </div>
                         </div>
                         <div class="col-sm-2"> 
-                            <div class="form-control" placeholder="pregunta">
-                            Pregunta
-                                    <label class="switch "><input type="checkbox" class="success">
-                                        <span class="slider round"></span>
-                                    </label>
-                               
+                            <div class="form-control" placeholder="pregunta" data-toggle="tooltip" data-placement="top" 
+                            title="Si el switche está apagado el mensaje será tomado como una opinión; en caso contrario será tomado como pregunta.">
+                            Preguntar
+                            <label class="switch "><input type="checkbox" class="success">
+                                <span class="slider round"></span>
+                            </label>  
                             </div>
                         </div>    
                         <div class="col-sm-6">

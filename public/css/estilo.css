@@ -36,7 +36,7 @@
 }
 
 input.success:checked + .slider {
-  background-color: #8bc34a;
+  background-color: #ff7700;
 }
 
 input:focus + .slider {
@@ -63,4 +63,36 @@ input:checked + .slider:before {
   background: #grey;
   padding: 2px 2px 2px 2px;
   border-radius: 5%;
+}
+
+#chatBody{
+overflow: scroll;
+height: 450px;
+}
+
+.dislike, .like{
+  color : grey;
+}
+
+.dislike:hover, .like:hover
+{
+  color : grey;
+  text-decoration: none;
+}
+
+.onDislike{
+  color: #DF0101;
+}
+
+.onLike{
+  color: #088A08;
+}
+
+a:hover, a:focus, a:active{
+  color:grey;
+  text-decoration: none;
+}
+
+a{
+  color:#ff7700;
 }
