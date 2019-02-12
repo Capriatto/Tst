@@ -27,6 +27,8 @@ function init(redis, socket){
     });
 }
 
+module.exports.init = init;
+
 
 io.on('connection', function(socket){
 

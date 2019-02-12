@@ -5,7 +5,7 @@ var socket = require('socket.io');
 
         var res = " ";
         if(dt.setHours(0,0,0,0) == today.setHours(0,0,0,0)){
-            moment.lang('es', {
+            moment.locale('es', {
                 relativeTime : {
                     future: "En %s",
                     past:   "Hace %s",
@@ -40,6 +40,8 @@ var socket = require('socket.io');
         return res;
     }
 
+    module.exports.fecha = fecha;
+
     function like(id){
 
         if($('#dislike-'+id).attr('class') == 'fa fa-thumbs-down onDislike'){
@@ -60,9 +62,11 @@ var socket = require('socket.io');
             $('#like-'+id).attr('class', 'fa fa-thumbs-up like')
             socket.emit('unlike', id);
         }
-        document.activeElement.blur();
+        //document.activeElement.blur();
     }
     
+    module.exports.like = like;
+
     function dislike(id){
 
         if($('#like-'+id).attr('class') == 'fa fa-thumbs-up onLike'){
@@ -81,8 +85,11 @@ var socket = require('socket.io');
             $('#dislike-'+id).attr('class', 'fa fa-thumbs-down dislike')
             socket.emit('undislike', id);
         }
-         document.activeElement.blur();
+         //document.activeElement.blur();
     }
+
+    module.exports.dislike = dislike;
+
 
     var onReady =(function(){
 
@@ -189,9 +196,7 @@ var socket = require('socket.io');
         };
 
         socket.on('init', function(data){
-            console.log(data);
             for(msg in data){
-                console.log(msg);
                 var msg = data[msg];
                 message(msg);
             }

@@ -16,7 +16,6 @@ module.exports = function(express, redis, io){
                 for(id in records){
                     var record = JSON.parse(records[id]);
                     record['id'] = id;
-                    console.log(record);
                     responseObj.push(record);
                 }
                 res.status(200).json({success: true, data: responseObj});
