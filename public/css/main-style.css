@@ -81,11 +81,11 @@ height: 450px;
 }
 
 .onDislike{
-  color: #DF0101;
+  color: #e74c3c ;
 }
 
 .onLike{
-  color: #088A08;
+  color: #ff7700;
 }
 
 a:hover, a:focus, a:active{

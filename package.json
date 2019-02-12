@@ -1,11 +1,19 @@
 {
   "name": "Mikgro",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Aplicación para la interacción entre asistentes y presentador en eventos académicos/comerciales",
   "main": "server.js",
   "scripts": {
+    "test": "jest",
     "start": "forever start server.js",
     "stop": "forever stop server.js"
+  },
+  "jest": {
+    "verbose": true,
+    "globals": { 
+        "socket": "socket"
+    },
+    "moduleDirectories": ["node_modules"]
   },
   "keywords": [
     "presentacion",
@@ -19,8 +27,13 @@
     "express": "latest",
     "localtunnel": "^1.9.1",
     "redis": "^0.10.3",
-    "socket.io": "latest"
+    "socket.io": "latest",
+    "socket.io-mock": "^1.2.3"
   },
+  "repository": "https://github.com/Capriatto/Tst",
   "author": "Mikgro",
-  "license": "GPL"
+  "license": "GPL-1.0-or-later",
+  "devDependencies": {
+    "jest": "^24.1.0"
+  }
 }

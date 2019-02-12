@@ -121,6 +121,6 @@ io.on('connection', function(socket){
 // Routing
 app.use(express.static(__dirname + '/public'));
 
-server.listen(3001, "127.0.0.1", function(){
-    console.log('Server listen on port http://127.0.0.1:3001');
+server.listen(3001, "0.0.0.0", function(){
+    console.log('Server listen on port http://0.0.0.0:3001');
 })
