@@ -1,0 +1,18 @@
+<testsuites name="Mocha Tests">
+  <testsuite name="Testing connections:" tests="1" errors="0" failures="0" skipped="0" timestamp="2019-02-12T20:38:25" time="0.106">
+    <testcase classname="Testing connections:" name="Server connection:" time="0.092">
+    </testcase>
+  </testsuite>
+  <testsuite name="Timer tests:" tests="1" errors="0" failures="0" skipped="0" timestamp="2019-02-12T20:38:25" time="0.016">
+    <testcase classname="Timer tests:" name="Testing the time is not empty" time="0.012">
+    </testcase>
+  </testsuite>
+  <testsuite name="Likes:" tests="1" errors="0" failures="0" skipped="0" timestamp="2019-02-12T20:38:25" time="0.002">
+    <testcase classname="Likes:" name="Testing likes are never null" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="Dislikes:" tests="1" errors="0" failures="0" skipped="0" timestamp="2019-02-12T20:38:25" time="0.002">
+    <testcase classname="Dislikes:" name="Testing Dislikes are never null" time="0">
+    </testcase>
+  </testsuite>
+</testsuites>

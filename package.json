@@ -4,6 +4,7 @@
   "description": "Aplicación para la interacción entre asistentes y presentador en eventos académicos/comerciales",
   "main": "server.js",
   "scripts": {
+    "test-jenkins": "JUNIT_REPORT_PATH=./report.xml mocha --colors --reporter mocha-jenkins-reporter",
     "test": "nyc mocha -R spec",
     "start": "forever start server.js",
     "stop": "forever stop server.js"
@@ -26,7 +27,8 @@
     "nyc": "^13.2.0",
     "redis": "^0.10.3",
     "should": "^4.6.0",
-    "socket.io": "latest"
+    "socket.io": "latest",
+    "mocha-jenkins-reporter": "0.4.1"
   },
   "repository": "https://github.com/Capriatto/Tst",
   "author": "Mikgro",
