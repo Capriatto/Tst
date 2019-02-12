@@ -1,4 +1,4 @@
-var socket = io();
+var socket = require('socket.io');
 
     function fecha(data){
         var dt = new Date(data), today = new Date();
@@ -39,8 +39,6 @@ var socket = io();
         }
         return res;
     }
-
-    module.exports=fecha;
 
     function like(id){
 
@@ -86,7 +84,7 @@ var socket = io();
          document.activeElement.blur();
     }
 
-    $(document).ready(function(){
+    var onReady =(function(){
 
         $('#form').submit(function(){
             date = new Date();
