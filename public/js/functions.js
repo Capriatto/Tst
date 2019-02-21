@@ -39,6 +39,7 @@ var socket = io();
         }
         return res;
     }
+    module.exports.fecha = fecha;
 
     function like(id){
 
@@ -60,8 +61,10 @@ var socket = io();
             $('#like-'+id).attr('class', 'fa fa-thumbs-up like')
             socket.emit('unlike', id);
         }
-        document.activeElement.blur();
+        //document.activeElement.blur();
     }
+    module.exports.like = like;
+
     function dislike(id){
 
         if($('#like-'+id).attr('class') == 'fa fa-thumbs-up onLike'){
@@ -80,8 +83,9 @@ var socket = io();
             $('#dislike-'+id).attr('class', 'fa fa-thumbs-down dislike')
             socket.emit('undislike', id);
         }
-         document.activeElement.blur();
+         //document.activeElement.blur();
     }
+    module.exports.dislike = dislike;
 
     $(document).ready(function(){
 
