@@ -24,7 +24,6 @@ module.exports = function(express, redis, io){
     });
 
     router.post('/mensajes/:id', function(req, res){
-        console.log(req.params);
         io.emit('active', {id: req.params.id});
         res.status(200).json({success:true})
     });

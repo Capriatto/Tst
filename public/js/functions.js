@@ -39,7 +39,6 @@ var socket = io();
         }
         return res;
     }
-    module.exports.fecha = fecha;
 
     function like(id){
 
@@ -61,10 +60,8 @@ var socket = io();
             $('#like-'+id).attr('class', 'fa fa-thumbs-up like')
             socket.emit('unlike', id);
         }
-        //document.activeElement.blur();
+        document.activeElement.blur();
     }
-    module.exports.like = like;
-
     function dislike(id){
 
         if($('#like-'+id).attr('class') == 'fa fa-thumbs-up onLike'){
@@ -83,17 +80,15 @@ var socket = io();
             $('#dislike-'+id).attr('class', 'fa fa-thumbs-down dislike')
             socket.emit('undislike', id);
         }
-         //document.activeElement.blur();
+         document.activeElement.blur();
     }
-    module.exports.dislike = dislike;
 
     $(document).ready(function(){
 
         $('#form').submit(function(){
             date = new Date();
 
-            socket.emit('message', $('#twitter').val(), $('#mssge').val(), date);
-            $('#twitter').val('');
+            socket.emit('message', $('#twitter').val(), $('#mssge').val(), $('#pregunta').is(':checked'), date);
             $('#mssge').val('');
               
             return false;
@@ -105,10 +100,13 @@ var socket = io();
             $('#like-numbers-'+record.id).text(''+record.likes+'');
         })
 
-        var message = function(data){
 
-            $('#chatBody').append(
+        
+        var message = function(data){
+            if (data.pregunta) {
+               $('#chatBody').append(
                 $('<li>')
+                .attr('style','background: #ffebcc; border-radius: .5em')
                 .addClass('list-group-item')
 
                 .append(
@@ -190,12 +188,98 @@ var socket = io();
                     )
                 )
             );
+            }else{
+                $('#chatBody').append(
+                $('<li>')
+                //.attr('style','background: #ffebcc; border-radius: .5em')
+                .addClass('list-group-item')
+
+                .append(
+                    $('<div>')
+                    .addClass('row')
+
+                    .append(
+                        $('<div>')
+                        .addClass('col-md-11')
+
+                        .append(
+                            $('<strong>')
+                            .addClass('list-group-item-heading')
+                            .append(
+                                $('<a>')
+                                .attr('href', 'http://twitter.com/'+data.twitter)
+                                .attr('target','_blank')
+                                .text('@' + data.twitter)
+                            )
+
+                        )
+                        .append(
+                            $('<p>')
+                            .addClass('list-group-item-text')
+                            .text(data.mssge)
+                        )
+                    )
+                    .append(
+
+                        $('<div>')
+                        .addClass('col-md-1 row')
+
+                        .append(
+                            $('<div>')
+                            .addClass('col-md-6')
+                            .append(
+                                $('<a>')
+                                .addClass('fa fa-thumbs-down dislike')
+                                .attr('id','dislike-'+data.id)
+                                .attr('href','#')
+                                .attr('onclick','dislike('+data.id+')')
+                            )
+                            .append(
+                                $('<h6>')
+                                .attr('id', 'dislike-numbers-'+data.id)
+                                .text(data.dislikes)
+                            )
+                        )
+
+                        .append(
+                            $('<div>')
+                            .addClass('col-md-6')
+                            .append(
+                                $('<a>')
+                                .addClass('fa fa-thumbs-up like')
+                                .attr('id','like-' + data.id)
+                                .attr('href','#')
+                                .attr('onclick','like('+data.id+')')
+                            )
+                            .append(
+                                $('<h6>')
+                                .attr('id','like-numbers-'+data.id)
+                                .text(data.likes)
+                            )
+                        )
+                    )
+                    .append(  data.date != null ?
+                        $('<div>')
+                        .addClass('col-md-12')
+                        .append(
+                            $('<i>')
+                            .addClass('fa fa-clock-o')
+                        )
+                        .append(
+                            $('<small>')
+                            .text(fecha(data.date))
+                        ) :
+                        $('<div>')
+                    )
+                )
+            );
+            }
+            
         };
 
         socket.on('init', function(data){
             console.log(data);
             for(msg in data){
-                console.log(msg);
                 var msg = data[msg];
                 message(msg);
             }

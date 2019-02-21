@@ -86,17 +86,18 @@ io.on('connection', function(socket){
     });
 
     //Get a message
-    socket.on('message', function(twitter, mensaje){
+    socket.on('message', function(twitter, mensaje, pregunta){
 
         record = {
             twitter: twitter,
             mssge: mensaje,
+            pregunta: pregunta,
             likes: 0,
             dislikes: 0,
             date: new Date(),
             toString: function(){
-                return require('util').format("[%s] @%s: %s (%d/%d)",
-                this.date, this.twitter, this.mssge, this.likes, this.dislikes);
+                return require('util').format("[%s] %s - @%s: %s (%d/%d)",
+                this.date, this.pregunta, this.twitter, this.mssge, this.likes, this.dislikes);
             }
         };
 
