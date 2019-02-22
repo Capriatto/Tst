@@ -107,7 +107,7 @@ var socket = io();
                $('#chatBody').append(
                 $('<li>')
                 .attr('style','background: #ffebcc; border-radius: .5em')
-                .addClass('list-group-item')
+                .addClass('list-group-item wrapword')
 
                 .append(
                     $('<div>')
@@ -192,7 +192,7 @@ var socket = io();
                 $('#chatBody').append(
                 $('<li>')
                 //.attr('style','background: #ffebcc; border-radius: .5em')
-                .addClass('list-group-item')
+                .addClass('list-group-item wrapword')
 
                 .append(
                     $('<div>')
