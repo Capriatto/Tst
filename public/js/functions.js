@@ -88,7 +88,7 @@ var socket = io();
         $("#twitter").keypress(function(e){
             var keyCode = e.which;
             
-            if (keyCode == 64 ) { 
+            if (keyCode == 64  || keyCode == 32 ) { 
               return false;
             }
         });
