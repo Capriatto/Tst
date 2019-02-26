@@ -85,6 +85,14 @@ var socket = io();
 
     $(document).ready(function(){
 
+        $("#twitter").keypress(function(e){
+            var keyCode = e.which;
+            
+            if (keyCode == 64 ) { 
+              return false;
+            }
+        });
+
         $('#form').submit(function(){
             date = new Date();
 
@@ -115,7 +123,7 @@ var socket = io();
 
                     .append(
                         $('<div>')
-                        .addClass('col-md-11')
+                        .addClass('col-md-11 wrap')
 
                         .append(
                             $('<strong>')
@@ -200,7 +208,7 @@ var socket = io();
 
                     .append(
                         $('<div>')
-                        .addClass('col-md-11')
+                        .addClass('col-md-11 wrap')
 
                         .append(
                             $('<strong>')
