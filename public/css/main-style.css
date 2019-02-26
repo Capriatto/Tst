@@ -6,7 +6,11 @@
   height: 20px;
   float:right;
 }
-
+body
+{
+  height: 100%;
+  width: 100%;
+}
 /* Hide default HTML checkbox */
 .switch input {display:none;}
 
@@ -67,7 +71,7 @@ input:checked + .slider:before {
 
 #chatBody{
 overflow: scroll;
-height: 450px;
+height: 100%; 
 }
 
 .dislike, .like{
@@ -103,6 +107,12 @@ a{
 }
 
 .panel-footer{
-  align-content: center;
+  position: fixed;
+  height: 100px;
+  bottom: 0;
+  width: 100%;
+}
 
+.license-padding{
+  padding-top: 20px;
 }
