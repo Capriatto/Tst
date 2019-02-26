@@ -101,3 +101,8 @@ a{
   text-align: justify;
   overflow: hidden;
 }
+
+.panel-footer{
+  align-content: center;
+
+}
