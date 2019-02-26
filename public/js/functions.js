@@ -123,7 +123,7 @@ var socket = io();
 
                     .append(
                         $('<div>')
-                        .addClass('col-md-11 wrap')
+                        .addClass('col-xs-11 wrap')
 
                         .append(
                             $('<strong>')
@@ -145,11 +145,11 @@ var socket = io();
                     .append(
 
                         $('<div>')
-                        .addClass('col-md-1 row')
+                        .addClass('col-xs-1 row ')
 
                         .append(
                             $('<div>')
-                            .addClass('col-md-6')
+                            .addClass('col-xs-6')
                             .append(
                                 $('<a>')
                                 .addClass('fa fa-thumbs-down dislike')
@@ -166,7 +166,7 @@ var socket = io();
 
                         .append(
                             $('<div>')
-                            .addClass('col-md-6')
+                            .addClass('col-xs-6')
                             .append(
                                 $('<a>')
                                 .addClass('fa fa-thumbs-up like')
@@ -183,7 +183,7 @@ var socket = io();
                     )
                     .append(  data.date != null ?
                         $('<div>')
-                        .addClass('col-md-12')
+                        .addClass('col-xs-12')
                         .append(
                             $('<i>')
                             .addClass('fa fa-clock-o')
@@ -208,7 +208,7 @@ var socket = io();
 
                     .append(
                         $('<div>')
-                        .addClass('col-md-11 wrap')
+                        .addClass('col-xs-11 wrap')
 
                         .append(
                             $('<strong>')
@@ -230,11 +230,11 @@ var socket = io();
                     .append(
 
                         $('<div>')
-                        .addClass('col-md-1 row')
+                        .addClass('col-xs-1 row')
 
                         .append(
                             $('<div>')
-                            .addClass('col-md-6')
+                            .addClass('col-xs-6')
                             .append(
                                 $('<a>')
                                 .addClass('fa fa-thumbs-down dislike')
@@ -251,7 +251,7 @@ var socket = io();
 
                         .append(
                             $('<div>')
-                            .addClass('col-md-6')
+                            .addClass('col-xs-6')
                             .append(
                                 $('<a>')
                                 .addClass('fa fa-thumbs-up like')
@@ -268,7 +268,7 @@ var socket = io();
                     )
                     .append(  data.date != null ?
                         $('<div>')
-                        .addClass('col-md-12')
+                        .addClass('col-xs-12')
                         .append(
                             $('<i>')
                             .addClass('fa fa-clock-o')
@@ -296,6 +296,7 @@ var socket = io();
 
         socket.on('message', function(data){
             message(data);
+            alert
             $("#chatBody").animate({
                 scrollTop: $('#chatBody')[0].scrollHeight
             }, 1000);
