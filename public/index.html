@@ -55,7 +55,7 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <div class="input-group-addon">@</div>
-                                <input class="form-control" placeholder="Twitter" id="twitter" required>
+                                <input class="form-control" onkeyup="this.value = this.value.replace (/[\@ ]/g, '')" placeholder="Twitter" id="twitter" required>
                             </div>
                         </div>
                         <div class="col-sm-3"> 

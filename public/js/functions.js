@@ -85,14 +85,6 @@ var socket = io();
 
     $(document).ready(function(){
 
-        $("#twitter").keypress(function(e){
-            var keyCode = e.which;
-            
-            if (keyCode == 64  || keyCode == 32 ) { 
-              return false;
-            }
-        });
-
         $('#form').submit(function(){
             date = new Date();
 
