@@ -33,7 +33,7 @@ var socket = io();
             var options = { weekday: "long", year: "numeric", month: "short",
             day: "numeric", hour:'2-digit', minute: '2-digit', hour12: 'true' };
 
-            date = new Date(data);
+            var date = new Date(data);
 
             res += primeraM(date.toLocaleDateString("es-CO", options));
         }
