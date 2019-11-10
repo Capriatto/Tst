@@ -67,8 +67,7 @@ input:checked + .slider:before {
 
 #chatBody{
 overflow: scroll;
-height: 300px; 
-margin-bottom: 8%;
+height: 50vw;
 }
 
 .dislike, .like{
@@ -134,9 +133,6 @@ p{
 }
 
 #chatBody{
-overflow: scroll;
-height: 80vw;
-margin-bottom: 40%;
 }
 
 .col-xs-11 {
