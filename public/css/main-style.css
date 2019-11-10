@@ -123,6 +123,7 @@ p{
 
 .panel-footer{
   vertical-align: middle;
+  position: fixed;
   height: 145px;
   bottom: 0;
   width: 100%;
@@ -133,6 +134,8 @@ p{
 }
 
 #chatBody{
+  overflow: scroll;
+  height: 100vw;
 }
 
 .col-xs-11 {
