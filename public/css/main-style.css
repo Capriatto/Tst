@@ -123,16 +123,19 @@ p{
 
 .panel-footer{
   vertical-align: middle;
+  position: fixed;
   height: 145px;
   bottom: 0;
   width: 100%;
 }
 
 .license-padding{
-  padding-top:5px;
+  padding-top:3px;
 }
 
 #chatBody{
+  overflow: scroll;
+  height: 97vw;
 }
 
 .col-xs-11 {
