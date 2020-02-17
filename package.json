@@ -22,20 +22,20 @@
   ],
   "dependencies": {
     "express": "latest",
-    "localtunnel": "^1.9.1",
+    "localtunnel": "^2.0.0",
     "mocha": "^5.2.0",
-    "nyc": "^13.2.0",
+    "mocha-jenkins-reporter": "0.4.1",
+    "nyc": "^15.0.0",
     "redis": "^0.10.3",
     "should": "^4.6.0",
-    "socket.io": "latest",
-    "mocha-jenkins-reporter": "0.4.1"
+    "socket.io": "latest"
   },
   "repository": "https://github.com/Capriatto/Tst",
   "author": "Mikgro",
   "license": "GPL-1.0-or-later",
   "devDependencies": {
     "chai": "^4.2.0",
-    "jquery": "^3.3.1",
+    "jquery": "^3.4.1",
     "jsdom": "13.2.0",
     "jsdom-global": "3.0.2",
     "mocha-jsdom": "^2.0.0",
