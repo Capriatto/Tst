@@ -1,6 +1,6 @@
 {
   "name": "Mikgro",
-  "version": "1.0.0",
+  "version": "2.3.0.0",
   "description": "Aplicación para la interacción entre asistentes y presentador en eventos académicos/comerciales",
   "main": "server.js",
   "scripts": {
