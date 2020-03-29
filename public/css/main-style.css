@@ -1,10 +1,10 @@
 /* The switch - the box around the slider */
 .switch {
   position: relative;
-  display: inline-block;
   width: 40px;
   height: 20px;
-  float:right;
+  float: right;
+  display: block;
 }
 
 /* Hide default HTML checkbox */
@@ -67,7 +67,7 @@ input:checked + .slider:before {
 
 #chatBody{
 overflow: scroll;
-height: 50vw;
+height: 75vh;
 }
 
 .dislike, .like{
@@ -103,7 +103,7 @@ a{
 }
 
 .panel-footer{
-  position: fixed;
+  position: absolute;
   height: 100px;
   bottom: 0;
   width: 100%;
@@ -135,15 +135,15 @@ p{
 
 #chatBody{
   overflow: scroll;
-  height: 100vw;
-}
+  height: 67vh;
+  }
 
 .col-xs-11 {
   width: 85%;
 }
 
 ul{
-  height: 50px;
+  height: 20px;
 }
 
 }
