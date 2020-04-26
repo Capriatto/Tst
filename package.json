@@ -23,6 +23,7 @@
   "dependencies": {
     "browserify": "^16.5.1",
     "express": "latest",
+    "express-session": "^1.17.1",
     "forever": "^2.0.0",
     "install": "^0.13.0",
     "localtunnel": "^2.0.0",

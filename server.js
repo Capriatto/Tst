@@ -1,5 +1,6 @@
 // Setup basic express server
 var express = require('express');
+var session = require('express-session')
 var app =  express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
@@ -120,6 +121,14 @@ io.on('connection', function(socket){
 });
 
 
+// Use the session middleware
+app.use(session({
+    secret: 'ym-M5urze8sxLK49-rMQ_#W#Z@3xNLNET__=Xncsm67UA&PFs^',
+    saveUninitialized: true,
+    resave: false,
+    cookie:
+        { maxAge: 1000 * 60 * 60 * 24} // 1 day expiration
+    }))
 
 // Routing
 app.use(express.static(__dirname + '/public'));
