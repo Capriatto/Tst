@@ -11,7 +11,7 @@ module.exports = function(express, redis, io){
 
     router.get('/mensajes', function(req, res){
         var responseObj = [];
-        redis.lrange('MENSAJES', 0, -1, function(err, records){
+        redis.lrange('chat', 0, -1, function(err, records){
             if(!err){
                 for(id in records){
                     var record = JSON.parse(records[id]);

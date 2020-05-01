@@ -21,6 +21,7 @@
     "asistentes"
   ],
   "dependencies": {
+    "ansi": "^0.3.1",
     "browserify": "^16.5.1",
     "express": "latest",
     "express-session": "^1.17.1",

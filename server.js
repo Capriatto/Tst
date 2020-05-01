@@ -6,8 +6,9 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var redis = require('redis').createClient();
 
-var table = "MENSAJES";
-
+// rds = redis data structure
+var rds_chat = "chat";
+var rds_room_details = "room";
 
 function init(redis, socket){
 
@@ -15,7 +16,7 @@ function init(redis, socket){
     console.log('Conexión detectada');
 
     var responseObj = [];
-    redis.lrange(table, 0, -1, function(err, records){
+    redis.lrange(rds_chat, 0, -1, function(err, records){
         if(!err){
             for(id in records){
                 var record = JSON.parse(records[id]);
@@ -37,13 +38,13 @@ io.on('connection', function(socket){
 
     // Social events
     socket.on('like', function(id){
-        redis.lrange(table, id, id, function(err, mensajes){
+        redis.lrange(rds_chat, id, id, function(err, mensajes){
 
             console.log(id, mensajes);
             record = JSON.parse(mensajes[0]);
 
             record.likes += 1;
-            redis.lset(table, id, JSON.stringify(record));
+            redis.lset(rds_chat, id, JSON.stringify(record));
 
             record['id'] = id;
             io.emit('update', record);
@@ -51,11 +52,11 @@ io.on('connection', function(socket){
     });
 
     socket.on('unlike', function(id){
-        redis.lrange(table, id, id, function(err, mensajes){
+        redis.lrange(rds_chat, id, id, function(err, mensajes){
 
             record = JSON.parse(mensajes[0]);
             record.likes -= 1;
-            redis.lset(table, id, JSON.stringify(record));
+            redis.lset(rds_chat, id, JSON.stringify(record));
 
             record['id'] = id;
             io.emit('update', record);
@@ -63,11 +64,11 @@ io.on('connection', function(socket){
     });
 
     socket.on('dislike', function(id){
-        redis.lrange(table, id, id, function(err, mensajes){
+        redis.lrange(rds_chat, id, id, function(err, mensajes){
 
             record = JSON.parse(mensajes[0]);
             record.dislikes += 1;
-            redis.lset(table, id, JSON.stringify(record));
+            redis.lset(rds_chat, id, JSON.stringify(record));
 
             record['id'] = id;
             io.emit('update', record);
@@ -75,11 +76,11 @@ io.on('connection', function(socket){
     });
 
     socket.on('undislike', function(id){
-        redis.lrange(table, id, id, function(err, mensajes){
+        redis.lrange(rds_chat, id, id, function(err, mensajes){
 
             record = JSON.parse(mensajes[0]);
             record.dislikes -= 1;
-            redis.lset(table, id, JSON.stringify(record));
+            redis.lset(rds_chat, id, JSON.stringify(record));
 
             record['id'] = id;
             io.emit('update', record);
@@ -104,7 +105,7 @@ io.on('connection', function(socket){
 
         console.log(record.toString());
 
-        var res = redis.rpush(table, JSON.stringify(record), function(err, id){
+        var res = redis.rpush(rds_chat, JSON.stringify(record), function(err, id){
             if (!err){
                 record['id'] = id - 1;
                 io.emit('message', record);
