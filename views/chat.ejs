@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mikgro WebApp</title>
+    <!-- Latest compiled and minified CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="js/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://momentjs.com/downloads/moment.min.js"></script>
+
+    <link rel="stylesheet" href="/css/chat-style.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <!--loading a favicon-->
+    <link rel="shortcut icon" type="ico" href="favicon.ico"/>
+
+    <!--vote management,timer for messages, socket management-->
+    <script src="/js/functions.js"></script>
+</head>
+<body>
+
+    <header class="page-header" id="page-header">
+        <div class="row">
+            <h3 class="col-xs-6 col-md-4" id="default-title">
+                MIKGRO
+            </h3>
+            <h3 class="col-xs-6 col-md-4 text-center" id="custom-title">
+                <em class="fa fa-microphone"></em> <%= data.eventName %><a href="" style="text-decoration: lightblue;"></a>
+            </h3>
+            <div class="col-xs-6 col-md-4 text-center" id="drag-n-drop">
+                <span>
+                    <p><a href="/download/<%= data.file1.name %>"><%= data.file1.name %></a></p>
+                    <p><a href="/download/<%= data.file2.name %>"><%= data.file2.name %></a></p>
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <h3 class="col-xs-6 col-md-4"></h3>
+            <small class="col-xs-6 col-md-4 text-center"><%= data.username %> - <a href="mailto:<%= data.presenterContact %>"><%= data.presenterContact %></a></small>
+            <h3 class="col-xs-6 col-md-4"></h3>
+        </div>
+    </header>
+
+    <div class= "roll">
+
+        <div class="panel panel-default" id="chatPanel">
+
+            <div class="panel-heading">
+            </div>
+            <ul class="panel-body list-group list-unstyled" id="chatBody"></ul>
+            
+
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="panel-footer">
+
+                <form id="form" >
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <div class="input-group-addon">@</div>
+                                <input class="form-control" onkeyup="this.value = this.value.replace (/[\@ ]/g, '')" placeholder="Twitter" id="twitter" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-3"> 
+                            <div class="form-control" placeholder="pregunta" data-toggle="tooltip" data-placement="top" 
+                            title="Si el switche está apagado el mensaje será tomado como una opinión; en caso contrario será tomado como pregunta.">
+                            Preguntar
+                            <label class="switch "><input type="checkbox" id="pregunta" class="success">
+                                <span class="slider round"></span>
+                            </label>  
+                            </div>
+                        </div>    
+                        <div class="col-sm-5">
+                            <div class="input-group">                                                       
+                                <input id="mssge" type="text" class="form-control" placeholder="Mensaje" required>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" id="btn-chat" type="submit">Enviar</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <h6 class="text-center license-padding">
+                    <script type="text/javascript">
+                        document.write(new Date().getFullYear());
+                    </script> - GPL
+                </h6>
+        </div>     
+    </footer>
+</body>
+</html>

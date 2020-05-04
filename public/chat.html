@@ -34,11 +34,16 @@
                 MIKGRO
             </h3>
             <h3 class="col-xs-6 col-md-4 text-center" id="custom-title">
-                <em class="fa fa-microphone"></em> Mi Presentación <a href="" style="text-decoration: lightblue;"><small>Editar</small></a>
+                <em class="fa fa-microphone"></em> {{ username }} <a href="" style="text-decoration: lightblue;"></a>
             </h3>
             <div class="col-xs-6 col-md-4 text-center" id="drag-n-drop">
                 [WIP] Drag n' drop zone
             </div>
+        </div>
+        <div class="row">
+            <h3 class="col-xs-6 col-md-4"></h3>
+            <small class="col-xs-6 col-md-4 text-center"><%= data.username %> - <a href="mailto:<%= data.presenterContact %>"><%= data.presenterContact %></a></small>
+            <h3 class="col-xs-6 col-md-4"></h3>
         </div>
     </header>
 

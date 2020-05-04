@@ -19,7 +19,16 @@
 				<h1><i class="fa fa-microphone"></i> Mikgro</h1>
 			</header>
 			<main class="join-main">
-				<form action="chat.html">
+				<form action="/chat" method="POST" encType="multipart/form-data">
+					<div class="form-control">
+						<label for="eventName">Nombre de la presentación*</label>
+						<input
+							type="text"
+							name="eventName"
+							id="eventName"
+							required
+						/>
+					</div>
 					<div class="form-control">
 						<label for="username">Nombre del presentador*</label>
 						<input
@@ -30,24 +39,28 @@
 						/>
 					</div>
 					<div class="form-control">
-						<label for="room">Nombre de la presentación*</label>
+						<label for="presenterContact">Link de contacto o Email</label>
 						<input
 							type="text"
-							name="event_name"
-							id="event_name"
-							required
+							name="presenterContact"
+							id="presenterContact"
 						/>
 					</div>
 					<div class="form-control">
-						<label for="room">Link de contacto o Email</label>
+						<label for="eventName">Memorias de la presentación <small>(max. 10MB)</small></label>
 						<input
-							type="text"
-							name="presenter_contact"
-							id="event_name"
+							style="margin-bottom: 10px;"
+							type="file"
+							name="file1"
+							id="file1"
+						/>
+						<input
+							type="file"
+							name="file2"
+							id="file2"
 						/>
 					</div>
 					<button type="submit" class="btn">Entrar</button>
-				</form>
 			</main>
 		</div>
 	</body>

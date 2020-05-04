@@ -1,10 +1,14 @@
 // Setup basic express server
-var express = require('express');
-var session = require('express-session')
-var app =  express();
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
-var redis = require('redis').createClient();
+const express = require('express');
+const session = require('express-session')
+const fileUpload = require('express-fileupload');
+const bodyParser = require('body-parser')
+const app =  express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+const redis = require('redis').createClient();
+
+var jsonParser = bodyParser.json()
 
 // rds = redis data structure
 var rds_chat = "chat";
@@ -23,7 +27,7 @@ function init(redis, socket){
                 record['id'] = id;
                 responseObj.push(record);
             }
-            console.log(responseObj);
+            //console.log(responseObj);
             socket.emit('init', responseObj);
         }
     });
@@ -121,6 +125,7 @@ io.on('connection', function(socket){
 
 });
 
+app.use(bodyParser.json());
 
 // Use the session middleware
 app.use(session({
@@ -133,6 +138,48 @@ app.use(session({
 
 // Routing
 app.use(express.static(__dirname + '/public'));
+
+app.use(fileUpload({
+    limits: {filesize: 10 * 2014 * 1024}, //limiting files to 10MB
+}));
+
+app.set('view engine', 'ejs');
+
+// POST method route
+app.post('/chat', function (req, res, next) {
+
+    if (req.files || Object.keys(req.files).length > 0) {
+    
+        let file1 = req.files.file1;
+        let file2 = req.files.file2;
+
+        file1.mv(__dirname+'/uploads/'+ req.files.file1.name, function(err) {
+            if (err)
+                return res.send("error here: \n"+ err);
+              
+        });
+        
+        file2.mv(__dirname+'/uploads/'+ req.files.file2.name, function(err) {
+            if (err)
+                return res.send("error here: \n"+ err);
+              
+                res.render('chat',
+                    {data: 
+                        {
+                        eventName:req.body.eventName, 
+                        username:req.body.username,
+                        presenterContact:req.body.presenterContact,
+                        file1:req.files.file1,
+                        file2:req.files.file2
+                }});
+        }); 
+    }
+});
+
+app.get('/download/:id', function(req,res,next){
+    //console.log('Request Id:', req.params.id);
+    res.download(__dirname + '/uploads/' + req.params.id, req.params.id);
+});
 
 server.listen(3001, "0.0.0.0", function(){
     console.log('Server listen on port http://0.0.0.0:3001');
