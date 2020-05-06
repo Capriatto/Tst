@@ -3,9 +3,10 @@ const express = require('express');
 const session = require('express-session')
 const fileUpload = require('express-fileupload');
 const bodyParser = require('body-parser')
+const socket = require('socket.io');
 const app =  express();
 const server = require('http').Server(app);
-const io = require('socket.io')(server);
+const io = socket(server);
 const redis = require('redis').createClient();
 
 var jsonParser = bodyParser.json()
@@ -148,32 +149,45 @@ app.set('view engine', 'ejs');
 // POST method route
 app.post('/chat', function (req, res, next) {
 
-    if (req.files || Object.keys(req.files).length > 0) {
-    
-        let file1 = req.files.file1;
-        let file2 = req.files.file2;
+    if (!req.files || Object.keys(req.files).length === 0) {
+        return res.render('chat', {data:{ eventName:req.body.eventName,username:req.body.username,presenterContact:req.body.presenterContact}});
+    }
 
+    let file1 = req.files.file1;
+    let file2 = req.files.file2;
+    let file3 = req.files.file3;
+
+    if (file1){
         file1.mv(__dirname+'/uploads/'+ req.files.file1.name, function(err) {
             if (err)
                 return res.send("error here: \n"+ err);
-              
-        });
-        
+    });}
+    
+    
+    if (file2){
         file2.mv(__dirname+'/uploads/'+ req.files.file2.name, function(err) {
             if (err)
                 return res.send("error here: \n"+ err);
-              
-                res.render('chat',
-                    {data: 
-                        {
-                        eventName:req.body.eventName, 
-                        username:req.body.username,
-                        presenterContact:req.body.presenterContact,
-                        file1:req.files.file1,
-                        file2:req.files.file2
-                }});
-        }); 
-    }
+    });}
+    
+    
+    if (file3){
+        file3.mv(__dirname+'/uploads/'+ req.files.file3.name, function(err) {
+            if (err)
+                return res.send("error here: \n"+ err);
+    });}      
+
+    res.render('chat',
+                {data: 
+                    {
+                    eventName:req.body.eventName, 
+                    username:req.body.username,
+                    presenterContact:req.body.presenterContact,
+                    file1:req.files.file1,
+                    file2:req.files.file2,
+                    file3:req.files.file3
+            }});
+    
 });
 
 app.get('/download/:id', function(req,res,next){
