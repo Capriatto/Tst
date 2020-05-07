@@ -9,11 +9,8 @@ const server = require('http').Server(app);
 const io = socket(server);
 const redis = require('redis').createClient();
 
-var jsonParser = bodyParser.json()
-
-// rds = redis data structure
+var socketID = '';
 var rds_chat = "chat";
-var rds_room_details = "room";
 
 function init(redis, socket){
 
@@ -39,7 +36,10 @@ module.exports.init = init;
 
 io.on('connection', function(socket){
 
-    init(redis, socket);
+    if(!socketID){
+        init(redis, socket);
+        socketID = socket.id;
+    }
 
     // Social events
     socket.on('like', function(id){
@@ -137,14 +137,22 @@ app.use(session({
         { maxAge: 1000 * 60 * 60 * 24} // 1 day expiration
     }))
 
-// Routing
-app.use(express.static(__dirname + '/public'));
+
 
 app.use(fileUpload({
-    limits: {filesize: 10 * 2014 * 1024}, //limiting files to 10MB
+    limits: {filesize: 10 * 2014 * 1024} //limiting files to 10MB
 }));
 
+// caching disabled for every route
+app.use(function(req, res, next) {
+    res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+    next();
+});
+  
 app.set('view engine', 'ejs');
+
+// Routing
+app.use(express.static(__dirname + '/public'));
 
 // POST method route
 app.post('/chat', function (req, res, next) {
@@ -191,7 +199,6 @@ app.post('/chat', function (req, res, next) {
 });
 
 app.get('/download/:id', function(req,res,next){
-    //console.log('Request Id:', req.params.id);
     res.download(__dirname + '/uploads/' + req.params.id, req.params.id);
 });
 
