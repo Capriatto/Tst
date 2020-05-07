@@ -132,6 +132,14 @@ p{
   font-size: 11pt;
 }
 
+#default-title{
+  display: none;
+}
+
+#files-zone{
+  display: none;
+}
+
 .panel-footer{
   vertical-align: middle;
   position: fixed;
