@@ -16,10 +16,14 @@
 
 body {
 	font-family: 'Roboto', sans-serif;
-	font-size: 16px;
+	font-size: 12px;
 	background: var(--light-color);
 	margin: 20px;
 }
+
+input[type="file"] {
+	width: 100%;
+  }
 
 footer{
 	text-align: center;
@@ -40,20 +44,20 @@ a {
 	background: var(--light-color);
 	color: var(--dark-color-a);
 	border: 0;
-	font-size: 17px;
+	font-size: 15px;
 }
 
 /* Join Page */
 .join-container {
-	max-width: 500px;
-	margin: 50px auto;
+	max-width: 400px;
+	margin: 5px auto;
 	color: rgb(255, 255, 255);
 	opacity: 0.6;
 }
 
 .join-header {
 	text-align: center;
-	padding: 30px;
+	padding: 20px;
 	background: var(--dark-color-a);
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
@@ -78,7 +82,7 @@ a {
 }
 
 .join-main input[type='text'] , input[type='email'] {
-	font-size: 16px;
+	font-size: 13px;
 	padding: 5px;
 	height: 40px;
 	width: 100%;
@@ -92,7 +96,7 @@ a {
 }
 
 .join-main .btn {
-	margin-top: 20px;
+	margin-top: 10px;
 	width: 100%;
 }
 
@@ -104,4 +108,19 @@ a {
 	.chat-sidebar {
 		display: none;
 	}
+
+	input[type="file"] {
+		width: 310px;
+	  }
+	
+	.uploads-control{
+		margin-top: 10px;
+	}
+	
+}
+
+@media (max-width: 400px) {
+	input[type="file"] {
+		width: 250px;
+	  }
 }

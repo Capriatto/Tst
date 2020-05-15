@@ -26,6 +26,7 @@
 							type="text"
 							name="eventName"
 							id="eventName"
+							value="Testing"
 							required
 						/>
 					</div>
@@ -35,6 +36,7 @@
 							type="text"
 							name="username"
 							id="username"
+							value="Presentador"
 							required
 						/>
 					</div>
@@ -44,10 +46,12 @@
 							type="email"
 							name="presenterContact"
 							id="presenterContact"
+							value="example@something.com"
 						/>
 					</div>
 					<div class="form-control">
-						<label for="eventName">Memorias de la presentación <small>(max. 10MB)</small></label>
+						<label for="eventName">Memorias de la presentación <small>(max.10MB)</small></label>
+						<div class="uploads-control"></div>
 						<input
 							style="margin-bottom: 10px;"
 							type="file"
@@ -65,8 +69,10 @@
 							name="file3"
 							id="file3"
 						/>
-					</div>
+						</div>
+					
 					<button type="submit" class="btn">Entrar</button>
+				</div>
 			</main>
 		</div>
 	</body>

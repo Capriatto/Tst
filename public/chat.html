@@ -27,23 +27,32 @@
     <script src="/js/functions.js"></script>
 </head>
 <body>
-
     <header class="page-header" id="page-header">
         <div class="row">
             <h3 class="col-xs-6 col-md-4" id="default-title">
                 MIKGRO
             </h3>
-            <h3 class="col-xs-6 col-md-4 text-center" id="custom-title">
-                <em class="fa fa-microphone"></em> {{ username }} <a href="" style="text-decoration: lightblue;"></a>
+            <div class="col-xs-6 col-md-4 text-center">
+            <h3 id="custom-title">
+                <em class="fa fa-microphone"></em> <%= data.eventName %><a href="" style="text-decoration: lightblue;"></a> 
             </h3>
-            <div class="col-xs-6 col-md-4 text-center" id="drag-n-drop">
-                [WIP] Drag n' drop zone
+            <small>
+                <span><%= data.username %><% if (data.presenterContact) { %> - <% } %> <a href="mailto:<%= data.presenterContact %>" target="_blank"><%= data.presenterContact %></a></span>
+            </small>
             </div>
-        </div>
-        <div class="row">
-            <h3 class="col-xs-6 col-md-4"></h3>
-            <small class="col-xs-6 col-md-4 text-center"><%= data.username %> - <a href="mailto:<%= data.presenterContact %>"><%= data.presenterContact %></a></small>
-            <h3 class="col-xs-6 col-md-4"></h3>
+            <div class="col-xs-6 col-md-4 text-center" id="files-zone">
+                <span>
+                    <% if (data.file1) { %>
+                        <p><a href="/download/<%= data.file1.name %>"><%= data.file1.name %></a></p>
+                    <% } %>
+                    <% if (data.file2) { %>
+                        <p><a href="/download/<%= data.file2.name %>"><%= data.file2.name %></a></p>
+                    <% } %>
+                    <% if (data.file3) { %>
+                        <p><a href="/download/<%= data.file3.name %>"><%= data.file3.name %></a></p>
+                    <% } %>
+                </span>
+            </div>
         </div>
     </header>
 
