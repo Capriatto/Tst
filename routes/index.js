@@ -43,7 +43,6 @@ router.post('/chat', function (req, res, next) {
 
 router.get('/chat', function(req, res, next) {
     //para poder hacer render tengo que mandar los siguientes datos para acá, eventname, username, presentercontact ...
-    console.log('aha!');
     res.render('chat',
                 {data: 
                     {

@@ -12,11 +12,17 @@ const redis = require('redis').createClient();
 const index = require('./routes/index');
 
 var rds_chat = "chat";
+var room_id = generate_room_name();
+
+function generate_room_name(){
+    var num = Math.floor(Math.random()*90000) + 100000;
+    return num.toString(16).toUpperCase();;
+}
 
 function init(redis, socket){
 
     //Init
-    console.log('Conexión detectada');
+    //console.log('Conexión detectada');
 
     var responseObj = [];
     redis.lrange(rds_chat, 0, -1, function(err, records){
@@ -28,6 +34,8 @@ function init(redis, socket){
             }
             //console.log(responseObj);
             socket.emit('init', responseObj);
+            // emit the room_id
+            socket.emit('room', room_id);
         }
     });
 }
@@ -99,6 +107,7 @@ io.on('connection', function(socket){
             pregunta: pregunta,
             likes: 0,
             dislikes: 0,
+            session_id: room_id,
             date: new Date(),
             toString: function(){
                 return require('util').format("[%s] %s - @%s: %s (%d/%d)",
@@ -119,7 +128,7 @@ io.on('connection', function(socket){
 
     //Disconect
     socket.on('disconnect', function(){
-        console.log('Desconexión detectada');
+        //console.log('Desconexión detectada');
     });
 
 });

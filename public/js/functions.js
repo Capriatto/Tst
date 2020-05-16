@@ -100,7 +100,9 @@ var socket = io();
             $('#like-numbers-'+record.id).text(''+record.likes+'');
         })
 
-
+        socket.on('room', function(room){
+            alert('Tu evento tiene el ID: ' + room);
+        });
         
         var message = function(data){
             if (data.pregunta) {
