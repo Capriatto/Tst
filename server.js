@@ -21,7 +21,7 @@ function init(redis, socket){
     //Init
     console.log('Conexión detectada');
 
-    var responseObj = [];
+    var responseObj = [], messagesOfRoom = [];
     redis.lrange(rds_chat, 0, -1, function(err, records){
         if(!err){
             for(id in records){
@@ -29,8 +29,14 @@ function init(redis, socket){
                 record['id'] = id;
                 responseObj.push(record);
             }
-            //console.log(responseObj);
-            socket.emit('init', responseObj);
+
+            for (let i = 0; i < responseObj.length; i++){
+                if(responseObj[i].room_id == room_id)
+                    messagesOfRoom.push(responseObj[i]);
+            }
+
+            console.log(messagesOfRoom);
+            socket.emit('init', messagesOfRoom);
             // emit the room_id
             socket.emit('room', room_id);
         }
@@ -104,11 +110,11 @@ io.on('connection', function(socket){
             pregunta: pregunta,
             likes: 0,
             dislikes: 0,
-            session_id: room_id,
+            room_id: room_id,
             date: new Date(),
             toString: function(){
-                return require('util').format("[%s] %s - @%s: %s (%d/%d)",
-                this.date, this.pregunta, this.twitter, this.mssge, this.likes, this.dislikes);
+                return require('util').format("[%s] %s %s- @%s: %s (%d/%d)",
+                this.date, this.pregunta, this.room_id, this.twitter, this.mssge, this.likes, this.dislikes);
             }
         };
 

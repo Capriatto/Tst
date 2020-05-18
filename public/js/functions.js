@@ -230,7 +230,6 @@ var socket = io();
                                 $('<a>')
                                 .addClass('fa fa-thumbs-down dislike')
                                 .attr('id','dislike-'+data.id)
-                                .attr('href','#')
                                 .attr('onclick','dislike('+data.id+')')
                             )
                             .append(
@@ -247,7 +246,6 @@ var socket = io();
                                 $('<a>')
                                 .addClass('fa fa-thumbs-up like')
                                 .attr('id','like-' + data.id)
-                                .attr('href','#')
                                 .attr('onclick','like('+data.id+')')
                             )
                             .append(

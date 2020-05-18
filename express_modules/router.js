@@ -63,14 +63,13 @@ router.post('/chat', function (req, res, next) {
 });
 
 router.get('/chat/:id', function(req, res, next) {
-    if(req.params.id != room.get)
-        return res.sendStatus(404);
+    // if(req.params.id != room.get){
+    //     return res.sendStatus(404);
+    // }
 
     redis.lrange(rds_event, -1, -1, function(err, mensajes){
             record = JSON.parse(mensajes[0]);
-        });
-    
-    res.render('chat',
+            res.render('chat',
                 {data: 
                     {
                     eventName: record.eventName,
@@ -80,7 +79,8 @@ router.get('/chat/:id', function(req, res, next) {
                     file1:record.file1,
                     file2:record.file2,
                     file3:record.file3
-            }});
+                }});
+    });
 });
 
 router.get('/download/:id', function(req,res,next){
@@ -89,9 +89,7 @@ router.get('/download/:id', function(req,res,next){
 
 // route for handling 404 requests(unavailable routes)
 router.use(function (req, res, next) {
-    res.status(404).send(
-        "<h1 style='text-align:center;margin:5% auto;color:darkgrey;\
-        font-size:5em;'>Oops, parece que estás perdid@!</h1>");
+    res.sendStatus(404);
   });
 
 
