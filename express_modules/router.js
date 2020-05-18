@@ -26,7 +26,7 @@ router.post('/chat', function (req, res, next) {
     });
 
     if (!req.files || Object.keys(req.files).length === 0) {
-        return res.redirect('/chat');
+        return res.redirect('/chat/' + room.get);
     }
 
     let file1 = req.files.file1;
@@ -59,10 +59,13 @@ router.post('/chat', function (req, res, next) {
                 return res.send("error here: \n"+ err);
     });}
     
-    return res.redirect('/chat');
+    return res.redirect('/chat/' + room.get);
 });
 
-router.get('/chat', function(req, res, next) {
+router.get('/chat/:id', function(req, res, next) {
+    if(req.params.id != room.get)
+        return res.sendStatus(404);
+
     redis.lrange(rds_event, -1, -1, function(err, mensajes){
             record = JSON.parse(mensajes[0]);
         });
