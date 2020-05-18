@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const redis = require('redis').createClient();
+const room = require('./room_name');
 
 const rds_event = "event";
 
@@ -14,6 +15,7 @@ router.post('/chat', function (req, res, next) {
         file1: '',
         file2: '',
         file3: '',
+        room: room.room_name,
         date: new Date(),
     };
 
@@ -24,7 +26,7 @@ router.post('/chat', function (req, res, next) {
     });
 
     if (!req.files || Object.keys(req.files).length === 0) {
-        return res.redirect('/chat');
+        return res.redirect('/chat/'+room.room_name);
     }
 
     let file1 = req.files.file1;
@@ -57,10 +59,14 @@ router.post('/chat', function (req, res, next) {
                 return res.send("error here: \n"+ err);
     });}
     
-    return res.redirect('/chat');
+    return res.redirect('/chat/'+room.room_name);
 });
 
-router.get('/chat', function(req, res, next) {
+router.get('/chat/:id', function(req, res, next) {
+    if(req.params.id != room.room_name){
+        return res.sendStatus(404);
+    }
+
     redis.lrange(rds_event, -1, -1, function(err, mensajes){
             record = JSON.parse(mensajes[0]);
         });
@@ -73,7 +79,8 @@ router.get('/chat', function(req, res, next) {
                     presenterContact:record.presenterContact,
                     file1:record.file1,
                     file2:record.file2,
-                    file3:record.file3
+                    file3:record.file3,
+                    room: room.room_name 
             }});
 });
 

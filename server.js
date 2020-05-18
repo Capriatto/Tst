@@ -9,15 +9,12 @@ const app =  express();
 const server = require('http').Server(app);
 const io = socket(server);
 const redis = require('redis').createClient();
-const index = require('./routes/index');
+const routes = require('./express_modules/router');
+const room = require('./express_modules/room');
 
 var rds_chat = "chat";
-var room_id = generate_room_name();
+var room_id = room.generate;
 
-function generate_room_name(){
-    var num = Math.floor(Math.random()*90000) + 100000;
-    return num.toString(16).toUpperCase();;
-}
 
 function init(redis, socket){
 
@@ -162,7 +159,7 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 
 // routes
-app.use('/', index);
+app.use('/', routes);
 
 server.listen(3001, "0.0.0.0", function(){
     console.log('Server listen on port http://0.0.0.0:3001');
