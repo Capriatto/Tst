@@ -22,7 +22,7 @@ function generate_room_name(){
 function init(redis, socket){
 
     //Init
-    //console.log('Conexión detectada');
+    console.log('Conexión detectada');
 
     var responseObj = [];
     redis.lrange(rds_chat, 0, -1, function(err, records){
@@ -128,7 +128,7 @@ io.on('connection', function(socket){
 
     //Disconect
     socket.on('disconnect', function(){
-        //console.log('Desconexión detectada');
+        console.log('Desconexión detectada');
     });
 
 });
@@ -144,8 +144,6 @@ app.use(session({
     cookie:
         { maxAge: 1000 * 60 * 60 * 24} // 1 day expiration
     }))
-
-
 
 app.use(fileUpload({
     limits: {filesize: 10 * 2014 * 1024} //limiting files to 10MB

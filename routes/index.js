@@ -1,11 +1,27 @@
 const express = require('express');
-var router = express.Router();
+const router = express.Router();
+const redis = require('redis').createClient();
+
+const rds_event = "event";
 
 // POST method route
 router.post('/chat', function (req, res, next) {
-    req.session.eventName = req.body.eventName;
-    req.session.username = req.body.username;
-    req.session.presenterContact = req.body.presenterContact;
+
+    record = {
+        eventName: req.body.eventName,
+        username: req.body.username,
+        presenterContact: req.body.presenterContact,
+        file1: '',
+        file2: '',
+        file3: '',
+        date: new Date(),
+    };
+
+    var event_info = redis.rpush(rds_event, JSON.stringify(record), function(err, id){
+        if (!err){
+            record['id'] = id - 1;
+        }
+    });
 
     if (!req.files || Object.keys(req.files).length === 0) {
         return res.redirect('/chat');
@@ -16,7 +32,8 @@ router.post('/chat', function (req, res, next) {
     let file3 = req.files.file3;
 
     if (file1){
-        req.session.file1 = req.files.file1;
+        record.file1= file1;
+        redis.lset(rds_event, -1, JSON.stringify(record));
         file1.mv(__dirname+'/../uploads/'+ req.files.file1.name, function(err) {
             if (err)
                 return res.send("error here: \n"+ err);
@@ -24,7 +41,8 @@ router.post('/chat', function (req, res, next) {
     
     
     if (file2){
-        req.session.file2 = req.files.file2;
+        record.file2= file2;
+        redis.lset(rds_event, -1, JSON.stringify(record));
         file2.mv(__dirname+'/../uploads/'+ req.files.file2.name, function(err) {
             if (err)
                 return res.send("error here: \n"+ err);
@@ -32,7 +50,8 @@ router.post('/chat', function (req, res, next) {
     
     
     if (file3){
-        req.session.file3 = req.files.file3;
+        record.file3= file3;
+        redis.lset(rds_event, -1, JSON.stringify(record));
         file3.mv(__dirname+'/../uploads/'+ req.files.file3.name, function(err) {
             if (err)
                 return res.send("error here: \n"+ err);
@@ -42,16 +61,19 @@ router.post('/chat', function (req, res, next) {
 });
 
 router.get('/chat', function(req, res, next) {
-    //para poder hacer render tengo que mandar los siguientes datos para acá, eventname, username, presentercontact ...
+    redis.lrange(rds_event, -1, -1, function(err, mensajes){
+            record = JSON.parse(mensajes[0]);
+        });
+    
     res.render('chat',
                 {data: 
                     {
-                    eventName:req.session.eventName, 
-                    username:req.session.username,
-                    presenterContact:req.session.presenterContact,
-                    file1:req.session.file1,
-                    file2:req.session.file2,
-                    file3:req.session.file3
+                    eventName: record.eventName,
+                    username:record.username,
+                    presenterContact:record.presenterContact,
+                    file1:record.file1,
+                    file2:record.file2,
+                    file3:record.file3
             }});
 });
 

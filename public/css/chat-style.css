@@ -78,7 +78,7 @@ input:checked + .slider:before {
 
 #chatBody{
 overflow: scroll;
-height: 75vh;
+height: 60vh;
 }
 
 .dislike, .like{
@@ -115,13 +115,12 @@ a{
 
 .panel-footer{
   position: absolute;
-  height: 100px;
   bottom: 0;
   width: 100%;
 }
 
 .license-padding{
-  padding-top: 20px;
+  padding-top: 5px;
 }
 
 @media (max-width:768px) {
