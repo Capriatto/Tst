@@ -162,7 +162,11 @@ app.use(function(req, res, next) {
   
 app.set('view engine', 'ejs');
 
-app.use(express.static(__dirname + '/public'));
+app.use('/css', express.static(__dirname + '/public/css'));
+app.use('/js', express.static(__dirname + '/public/js'));
+app.use('/fonts', express.static(__dirname + '/public/fonts'));
+app.use('/less', express.static(__dirname + '/public/less'));
+app.use('/scss', express.static(__dirname + '/public/scss'));
 
 // routes
 app.use('/', routes);

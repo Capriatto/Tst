@@ -3,8 +3,15 @@ const router = express.Router();
 const redis = require('redis').createClient();
 const room = require('./room');
 const cookieParser = require('cookie-parser');
+var path = require('path');
 
 const rds_event = "event";
+
+router.get('/',function(req, res, next) {
+    if(req.cookies.io)
+        res.redirect('/chat/' + room.get);
+    return res.render('index');
+});
 
 // POST method route
 router.post('/chat', function (req, res, next) {
@@ -84,10 +91,6 @@ router.get('/chat/:id', function(req, res, next) {
     });
 });
 
-router.get('/', function(req,res){
-    console.log('asperos!!');
-});
-
 router.get('/download/:id', function(req,res,next){
     res.download(__dirname + '/../uploads/' + req.params.id, req.params.id);
 });
@@ -96,6 +99,5 @@ router.get('/download/:id', function(req,res,next){
 router.use(function (req, res, next) {
     res.sendStatus(404);
   });
-
 
 module.exports = router;

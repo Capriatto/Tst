@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+			integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="css/index-style.css" />
+		<title>Mikgro</title>
+	</head>
+	<body>
+		<div class="join-container">
+			<header class="join-header">
+				<h1><i class="fa fa-microphone"></i> Mikgro</h1>
+			</header>
+			<main class="join-main">
+				<form action="/chat" method="POST" encType="multipart/form-data">
+					<div class="form-control">
+						<label for="eventName">Nombre de la presentación*</label>
+						<input
+							type="text"
+							name="eventName"
+							id="eventName"
+							value="Testing"
+							required
+						/>
+					</div>
+					<div class="form-control">
+						<label for="username">Nombre del presentador*</label>
+						<input
+							type="text"
+							name="username"
+							id="username"
+							value="Presentador"
+							required
+						/>
+					</div>
+					<div class="form-control">
+						<label for="presenterContact">Email de contacto (Opcional)</label>
+						<input
+							type="email"
+							name="presenterContact"
+							id="presenterContact"
+							value="example@something.com"
+						/>
+					</div>
+					<div class="form-control">
+						<label for="eventName">Memorias de la presentación <small>(max.10MB)</small></label>
+						<div class="uploads-control"></div>
+						<input
+							style="margin-bottom: 10px;"
+							type="file"
+							name="file1"
+							id="file1"
+						/>
+						<input
+							style="margin-bottom: 10px;"
+							type="file"
+							name="file2"
+							id="file2"
+						/>
+						<input
+							type="file"
+							name="file3"
+							id="file3"
+						/>
+						</div>
+					
+					<button type="submit" class="btn">Entrar</button>
+				</div>
+			</main>
+		</div>
+	</body>
+	<footer>
+		<h6 class="text-center">
+			<script type="text/javascript">
+				document.write(new Date().getFullYear());
+			</script> - GPL
+		</h6>
+	</footer>
+</html>
