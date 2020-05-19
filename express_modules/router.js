@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 const redis = require('redis').createClient();
 const room = require('./room');
+const server = require('../server');
 const cookieParser = require('cookie-parser');
+const app = server;
 
 const rds_event = "event";
 
@@ -14,6 +16,7 @@ router.get('/',function(req, res, next) {
 
 // POST method route
 router.post('/chat', function (req, res, next) {
+    room.generate;
 
     record = {
         eventName: req.body.eventName,
@@ -110,9 +113,30 @@ router.get('/logout', function(req,res,next){
     });
     res.clearCookie('io');
     res.clearCookie('user_sid');
-    room.generate;
+
+    record = {
+        twitter: '@MIKGRO_APP',
+        mssge: '== EVENTO FINALIZADO ==',
+        pregunta: false,
+        likes: 0,
+        dislikes: 0,
+        room_id: room.get,
+        date: new Date()
+        
+    };
+
+    req.app.io.to(room.get).emit('message',record);
+ 
+    req.app.io.of('/').in(room.get).clients(function(error,clients){
+        if (error) throw error;
+        
+        clients.forEach(clients => req.app.io.sockets.sockets[clients].leave(room.get));
+        console.log(clients.length);
+    });
+
     return res.redirect('/');
 });
+
 
 // route for handling 404 requests(unavailable routes)
 router.use(function (req, res, next) {

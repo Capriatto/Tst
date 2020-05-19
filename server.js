@@ -15,8 +15,12 @@ const room = require('./express_modules/room');
 var rds_chat = "chat";
 var room_id = room.generate;
 
+app.io = io;
+app.socket = socket;
 
 function init(redis, socket){
+
+    socket.join(room_id);
 
     //Init
     console.log('Conexión detectada');
@@ -44,7 +48,6 @@ function init(redis, socket){
 }
 
 module.exports.init = init;
-
 
 io.on('connection', function(socket){
 
@@ -123,7 +126,7 @@ io.on('connection', function(socket){
         var res = redis.rpush(rds_chat, JSON.stringify(record), function(err, id){
             if (!err){
                 record['id'] = id - 1;
-                io.emit('message', record);
+                io.to(room_id).emit('message', record);
             }
         });
 
@@ -174,3 +177,5 @@ app.use('/', routes);
 server.listen(3001, "0.0.0.0", function(){
     console.log('Server listen on port http://0.0.0.0:3001');
 })
+
+module.exports = app;
