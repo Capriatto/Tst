@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const redis = require('redis').createClient();
 const room = require('./room');
+const cookieParser = require('cookie-parser');
 
 const rds_event = "event";
 
@@ -63,9 +64,9 @@ router.post('/chat', function (req, res, next) {
 });
 
 router.get('/chat/:id', function(req, res, next) {
-    // if(req.params.id != room.get){
-    //     return res.sendStatus(404);
-    // }
+    if(req.params.id != room.get){
+        return res.sendStatus(404);
+    }
 
     redis.lrange(rds_event, -1, -1, function(err, mensajes){
             record = JSON.parse(mensajes[0]);
@@ -81,6 +82,10 @@ router.get('/chat/:id', function(req, res, next) {
                     file3:record.file3
                 }});
     });
+});
+
+router.get('/', function(req,res){
+    console.log('asperos!!');
 });
 
 router.get('/download/:id', function(req,res,next){
