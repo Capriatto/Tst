@@ -146,7 +146,7 @@ app.use(session({
     resave: false,
     cookie:
         { maxAge: 1000 * 60 * 60 * 24} // 1 day expiration
-    }))
+    }));
 
 app.use(fileUpload({
     limits: {filesize: 10 * 2014 * 1024} //limiting files to 10MB

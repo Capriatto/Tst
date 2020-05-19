@@ -3,13 +3,12 @@ const router = express.Router();
 const redis = require('redis').createClient();
 const room = require('./room');
 const cookieParser = require('cookie-parser');
-var path = require('path');
 
 const rds_event = "event";
 
 router.get('/',function(req, res, next) {
     if(req.cookies.io)
-        res.redirect('/chat/' + room.get);
+        return res.redirect('/chat/' + room.get);
     return res.render('index');
 });
 
@@ -24,6 +23,7 @@ router.post('/chat', function (req, res, next) {
         file1: '',
         file2: '',
         file3: '',
+        presenter: req.session.id,
         date: new Date(),
     };
 
@@ -75,14 +75,22 @@ router.get('/chat/:id', function(req, res, next) {
         return res.sendStatus(404);
     }
 
+    var currentUser = req.session.id;
+    var isPresenter = false;
+
     redis.lrange(rds_event, -1, -1, function(err, mensajes){
             record = JSON.parse(mensajes[0]);
+
+            if (currentUser == record.presenter)
+                isPresenter=true;
+            
             res.render('chat',
                 {data: 
                     {
                     eventName: record.eventName,
                     username:record.username,
                     presenterContact:record.presenterContact,
+                    isPresenter : isPresenter,
                     room: record.room,
                     file1:record.file1,
                     file2:record.file2,
@@ -95,9 +103,21 @@ router.get('/download/:id', function(req,res,next){
     res.download(__dirname + '/../uploads/' + req.params.id, req.params.id);
 });
 
+router.get('/logout', function(req,res,next){
+    req.session.destroy((err) => {
+        if(err)
+            console.log("error => " + err);
+    });
+    res.clearCookie('io');
+    res.clearCookie('user_sid');
+    room.generate;
+    return res.redirect('/');
+});
+
 // route for handling 404 requests(unavailable routes)
 router.use(function (req, res, next) {
     res.sendStatus(404);
   });
+
 
 module.exports = router;
